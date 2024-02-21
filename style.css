@@ -1,6 +1,63 @@
+
+
 body{
     background-color:#14192d;
     margin:0;
     overflow:hidden;
-    cursor:none;
+    user-select: none
 }
+
+h1{
+    text-align: center;
+    color: white;
+    font-family: "Anta", sans-serif;
+    font-weight: 600;
+    font-style: normal;
+    font-size: 5vw;
+}
+h2{
+    text-align: center;
+    color: white;
+    font-family: "Fredoka", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 300;
+    font-style: normal;
+    font-variation-settings:
+            "wdth" 100;
+    padding: 1vw;
+}
+
+button{
+    background-color: #f5f5f5;
+    color: #14192d;
+    font-family: "Anta", sans-serif;
+    font-weight: 600;
+    font-style: normal;
+    font-size: 2vw;
+    padding: 1vw;
+    border: none;
+    border-radius: 0.5vw;
+    cursor: pointer;
+    transition: 0.3s;
+    margin: 0 auto;
+    display: block;
+}
+
+input, select{
+    background-color: #f5f5f5;
+    color: #14192d;
+    font-family: "Anta", sans-serif;
+    font-weight: 600;
+    font-style: normal;
+    font-size: 1vw;
+    padding: 1vw;
+    border: none;
+    border-radius: 0.5vw;
+    cursor: pointer;
+    transition: 0.3s;
+    margin: 0 auto;
+    display: block;
+    height: 0.25vw;
+}
+
+

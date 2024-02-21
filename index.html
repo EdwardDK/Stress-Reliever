@@ -8,11 +8,22 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+	<h1 id="header">Choose your settings:</h1>
 
+	<div>
+	<h2> Choose Smallest Dot Size:<input min="0" max="20" type="number" id="minDot" onkeyup="if(parseInt(this.value)>=20){ this.value =20; return false; }"></h2>
+		<h2 id="chosen"> Choose Color:
+			<select id="choice" onchange="mouseUp()">
+				<option value="rgb(173,216,230)">Blue</option>
+				<option value="rgb(205,92,92)">Red</option>
+				<option value="rgb(59,122,87)">Green</option>
+				<option  value="rgb(238,220,130)">Yellow</option>
+			</select>
 
-
-
-	<canvas id="canvas"></canvas>
+		</h2>
+	</div>
+		<button id="choose" onclick="choose()">Confirm</button>
+	<canvas id="canvas" style="display: none"></canvas>
 
 <!--	<script type="text/javascript" src="vanilla-tilt.js"></script>-->
 <!--	<script type="text/javascript">-->
@@ -27,6 +38,14 @@
 <!--			speed:300,-->
 
 <!--		});</script>-->
+
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Anta&display=swap" rel="stylesheet">
+
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Anta&family=Fredoka:wght@300..700&family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
 <script src="main.js"></script>
 </body>
 </html>

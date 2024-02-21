@@ -1,62 +1,106 @@
 
+const canvas = document.querySelector("canvas");
+const ctx = canvas.getContext("2d");
+const body=document.querySelector("body")
+const header=document.querySelector("#header")
+const button=document.querySelector("#choose")
+const second=document.querySelector("h2")
 
-function start(){
-    const config={
-        dotMinRad:5,
-        dotMaxRad:20,
-        defColor: "rgba(10,206,250,0.9)",
-        massFactor:0.002,
-        smooth: 0.95,
-        sphereRad: 300,
-        bigDotRad: 35,
-        mouseSize: 110,
+const choosing=document.getElementById("chosen")
+const select=document.getElementById("choice")
+const minDot=document.getElementById("minDot")
 
-    }
-    const TWO_PI=Math.PI*2
-    const canvas = document.querySelector("canvas");
-    const ctx = canvas.getContext("2d");
 
-    let h;
-    let w;
-   let mouse;
-   let dots;
+function mouseUp() {
+    let color=select.value
 
-    class Dot{
-
-        constructor(r) {
-            this.pos= {x:mouse.x, y:mouse.y}
-            this.vel={x:0,y:0}
-            this.rad=random(config.dotMinRad,config.dotMaxRad)
-            this.mass=this.rad*config.massFactor
-            this.color= config.defColor
-            this.rad=r||random(config.dotMinRad,config.dotMaxRad)
-        }
-
-        draw(x,y){
-        createCircle(this.pos.x,this.pos.y,this.rad,true,this.color)
-        createCircle(this.pos.x,this.pos.y,this.rad,false,config.defColor)
-            this.pos.x=x||this.pos.x+this.vel.x
-            this.pos.y=y||this.pos.y+this.vel.y
-    }
 }
 
-function updateDots(){
+function choose() {
 
+    if (canvas.style.display === "none") {
+        canvas.style.display = "block";
+        header.style.display= "none";
+        button.style.display= "none";
+        second.style.display= "none";
+        body.style.cursor = "none";
+        select.style.display="none";
+        choosing.style.display= "none";
 
-        for(let i=1;i<dots.length;i++){
-            let acc={x:0,y:0}
-            for(let j=0;j<dots.length;j++){
+    } else {
+        canvas.style.display = "none";
+        header.style.display= "block";
+        button.style.display= "block";
+        second.style.display= "block";
+        body.style.cursor = "default";
+        select.style.display="block";
+        choosing.style.display= "block";
 
-               if(i==j) continue;
-               let a=dots[i]
-                let b=dots[j]
-                let delta={x:b.pos.x-a.pos.x,y:b.pos.y-a.pos.y}
-                let dist=Math.sqrt(delta.x*delta.x+delta.y*delta.y)||1
-                let force=(dist-config.sphereRad)/dist*b.mass
+    }
+
+    start()
+}
+
+function start(){
+    let color=select.value;
+    const config={
+        dotMinRad:minDot.value,
+        dotMaxRad:20,
+        defColor: color,
+        massFactor:0.002,
+        smooth: 0.65,
+        sphereRad: 300,
+        bigDotRad: 35,
+        mouseSize: 120 ,
+    }
+    const TWO_PI = 2 * Math.PI;
+
+    const canvas = document.querySelector('canvas');
+    const ctx = canvas.getContext('2d');
+
+    let w, h, mouse, dots;
+
+    class Dot {
+        constructor(r) {
+            this.pos = {
+                x: mouse.x,
+                y: mouse.y
+            };
+            this.vel = {
+                x: 0,
+                y: 0
+            };
+            this.rad = r || random(config.dotMinRad, config.dotMaxRad);
+            this.mass = this.rad * config.massFactor;
+            this.color = config.defColor;
+        }
+
+        draw(x, y) {
+            this.pos.x = x || this.pos.x + this.vel.x;
+            this.pos.y = y || this.pos.y + this.vel.y;
+            createCircle(this.pos.x, this.pos.y, this.rad, true, this.color);
+            createCircle(this.pos.x, this.pos.y, this.rad, false, config.defColor);
+        }
+    }
+
+    function updateDots() {
+        for (let i = 1; i < dots.length; i++) {
+            let acc = { x: 0, y: 0 };
+
+            for (let j = 0; j < dots.length; j++) {
+                if (i === j) continue;
+                let [a, b] = [dots[i], dots[j]];
+
+                let delta = {
+                    x: b.pos.x - a.pos.x,
+                    y: b.pos.y - a.pos.y
+                };
+                let dist = Math.sqrt(delta.x * delta.x + delta.y * delta.y) || 1;
+                let force = (dist - config.sphereRad) / dist * b.mass;
 
                 if (j === 0) {
                     let alpha = config.mouseSize / dist;
-                    a.color = `rgba(250, 10, 30, ${alpha})`;
+                    a.color = `rgba(189, 183, 107, ${alpha})`;
                     dist < config.mouseSize ? force = (dist - config.mouseSize) * b.mass : force = a.mass;
                 }
 
@@ -68,69 +112,60 @@ function updateDots(){
             dots[i].vel.y = dots[i].vel.y * config.smooth + acc.y * dots[i].mass;
         }
 
-    dots.map(e => e == dots[0] ? e.draw(mouse.x, mouse.y) : e.draw());
-
+        dots.map(e => e == dots[0] ? e.draw(mouse.x, mouse.y) : e.draw());
     }
-    function createCircle(x,y,rad,fill,color){
 
-        ctx.fillStyle=ctx.strokeStyle=color;
-        ctx.beginPath()
-        ctx.arc(x,y,rad,0,TWO_PI)
+    function createCircle(x, y, rad, fill, color) {
+        ctx.fillStyle = ctx.strokeStyle = color;
+        ctx.beginPath();
+        ctx.arc(x, y, rad, 0, TWO_PI);
+        ctx.closePath();
+        fill ? ctx.fill() : ctx.stroke();
+    }
 
-        ctx.closePath()
-        if(fill===true){
-            ctx.fill()
+    function random(min, max) {
+        return Math.random() * (max - min) + min;
+    }
+
+    function init() {
+        w = canvas.width = innerWidth;
+        h = canvas.height = innerHeight;
+
+        mouse = {
+            x: w / 2,
+            y: h / 2,
+            down: false
+        };
+
+        dots = [];
+
+        dots.push(new Dot(config.bigDotRad));
+    }
+
+    function loop() {
+        ctx.clearRect(0, 0, w, h);
+
+        if (mouse.down) {
+            dots.push(new Dot());
         }
-        else{
-            ctx.stroke()
-        }
+
+        updateDots();
+
+        window.requestAnimationFrame(loop);
     }
 
+    init();
+    loop();
 
-
-
-    function random(min,max){
-        return Math.random()*(max-min)+min
+    function setPos({ layerX, layerY }) {
+        [mouse.x, mouse.y] = [layerX, layerY];
     }
 
-    function init(){
-
-        w=canvas.width=innerWidth;
-        h=canvas.height=innerHeight;
-
-        mouse={x:w/2,y:h/2, down:false}
-        dots=[];
-        dots.push(new Dot(config.bigDotRad))
-        
-
+    function isDown() {
+        mouse.down = !mouse.down;
     }
 
-
-    function loop(){
-        ctx.clearRect(0,0,w,h)
-        if(mouse.down){
-            dots.push(new Dot())
-        }
-        updateDots()
-
-        window.requestAnimationFrame(loop)
-    }
-    init()
-    loop()
-        function setPos({layerX,layerY}){
-        mouse.x=layerX;
-        mouse.y=layerY;
-    }
-
-    function isDown(){
-        mouse.down=!mouse.down
-        console.log("x-"+ mouse.x);
-        console.log("y-"+ mouse.y);
-    }
-        canvas.addEventListener("mousemove",setPos)
-    
-window.addEventListener("mousedown", isDown);
-    window.addEventListener("mouseup", isDown);
+    canvas.addEventListener('mousemove', setPos);
+    window.addEventListener('mousedown', isDown);
+    window.addEventListener('mouseup', isDown);
 }
-
-start()

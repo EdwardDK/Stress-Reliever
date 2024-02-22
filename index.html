@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" >
 <head>
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -8,11 +8,18 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-	<h1 id="header">Choose your settings:</h1>
+
+
+<div class="cursor"></div>
+
+
+
+
+	<h1 id="header" class="cursor-scale typewriter " >Choose your settings:</h1>
 
 	<div>
-	<h2> Choose Smallest Dot Size:<input min="0" max="20" type="number" id="minDot" onkeyup="if(parseInt(this.value)>=20){ this.value =20; return false; }"></h2>
-		<h2 id="chosen"> Choose Color:
+	<h2  class="cursor-scale small"> Choose Smallest Dot Size:<input min="0" max="20" type="number" id="minDot" onkeyup="if(parseInt(this.value)>=20){ this.value =20; return false; }"></h2>
+		<h2 id="chosen" class="cursor-scale small"> Choose Color:
 			<select id="choice" onchange="mouseUp()">
 				<option value="rgb(173,216,230)">Blue</option>
 				<option value="rgb(205,92,92)">Red</option>
@@ -22,8 +29,11 @@
 
 		</h2>
 	</div>
-		<button id="choose" onclick="choose()">Confirm</button>
-	<canvas id="canvas" style="display: none"></canvas>
+		<button id="choose" onclick="choose()" class="cursor-scale" >Confirm</button>
+
+
+
+	<canvas id="canvas" style="display: none" class="cursor-scale small"></canvas>
 
 <!--	<script type="text/javascript" src="vanilla-tilt.js"></script>-->
 <!--	<script type="text/javascript">-->
@@ -39,13 +49,16 @@
 
 <!--		});</script>-->
 
-	<link rel="preconnect" href="https://fonts.googleapis.com">
-	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-	<link href="https://fonts.googleapis.com/css2?family=Anta&display=swap" rel="stylesheet">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
 
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=Anta&family=Fredoka:wght@300..700&family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+<script src="jquery.min.js"></script>
+<script src="gsap.min.js"></script>
 <script src="main.js"></script>
 </body>
 </html>

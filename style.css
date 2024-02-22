@@ -4,16 +4,72 @@ body{
     background-color:#14192d;
     margin:0;
     overflow:hidden;
-    user-select: none
+    user-select: none;
+    cursor:none;
+}
+
+.typewriter h1 {
+    color: #fff;
+    font-family: monospace;
+    overflow: hidden; /* Ensures the content is not revealed until the animation */
+    border-right: .15em solid orange; /* The typwriter cursor */
+    white-space: nowrap; /* Keeps the content on a single line */
+    margin: 0 auto; /* Gives that scrolling effect as the typing happens */
+    letter-spacing: .15em; /* Adjust as needed */
+    animation:
+            typing 3.5s steps(30, end),
+            blink-caret .5s step-end infinite;
+}
+
+/* The typing effect */
+@keyframes typing {
+    from { width: 0 }
+    to { width: 100% }
+}
+
+/* The typewriter cursor effect */
+@keyframes blink-caret {
+    from, to { border-color: transparent }
+    50% { border-color: orange }
+}
+
+:root {
+    --color-primary: #FBAB7E;
+}
+
+.cursor{
+    position: fixed;
+    width: 40px;
+    height: 40px;
+    margin-left: -20px;
+    margin-top: -20px;
+    border-radius: 50%;
+    border: 2px solid var(--color-primary);
+    transition: transform 0.3s ease;
+    transform-origin: center center;
+    pointer-events: none;
+    z-index: 1000;
+}
+
+.grow, .grow-small{
+    transform: scale(4);
+    background: white;
+    mix-blend-mode: difference;
+    border: none;
+}
+
+.grow-small{
+    transform: scale(2);
 }
 
 h1{
     text-align: center;
     color: white;
-    font-family: "Anta", sans-serif;
-    font-weight: 600;
+    font-family: "Raleway", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 700;
     font-style: normal;
-    font-size: 5vw;
+    font-size: 4vw;
 }
 h2{
     text-align: center;
@@ -59,5 +115,8 @@ input, select{
     display: block;
     height: 0.25vw;
 }
+
+
+
 
 

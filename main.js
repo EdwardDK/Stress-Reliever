@@ -11,6 +11,49 @@ const select=document.getElementById("choice")
 const minDot=document.getElementById("minDot")
 
 
+
+
+
+
+
+let cursor = document.querySelector('.cursor');
+
+let cursorScale = document.querySelectorAll('.cursor-scale');
+let mouseX = 0;
+let mouseY = 0;
+
+gsap.to({}, 0.016, {
+    repeat: -1,
+    onRepeat: function(){
+        gsap.set(cursor, {
+            css: {
+                left: mouseX,
+                top: mouseY,
+            }
+        })
+    }
+});
+
+window.addEventListener('mousemove', (e)=> {
+    mouseX = e.clientX;
+    mouseY = e.clientY;
+})
+
+cursorScale.forEach(link => {
+    link.addEventListener('mousemove', ()=> {
+        cursor.classList.add('grow');
+        if (link.classList.contains('small')){
+            cursor.classList.remove('grow');
+            cursor.classList.add('grow-small');
+        }
+    });
+
+    link.addEventListener('mouseleave', ()=> {
+        cursor.classList.remove('grow');
+        cursor.classList.remove('grow-small');
+    });
+})
+
 function mouseUp() {
     let color=select.value
 
@@ -26,6 +69,10 @@ function choose() {
         body.style.cursor = "none";
         select.style.display="none";
         choosing.style.display= "none";
+
+        let hi=new Audio('https://audio.com/edward-doubovik/audio/beat')
+
+        hi.play()
 
     } else {
         canvas.style.display = "none";
@@ -100,7 +147,7 @@ function start(){
 
                 if (j === 0) {
                     let alpha = config.mouseSize / dist;
-                    a.color = `rgba(189, 183, 107, ${alpha})`;
+                    a.color = `rgba(255,179,186, ${alpha})`;
                     dist < config.mouseSize ? force = (dist - config.mouseSize) * b.mass : force = a.mass;
                 }
 

@@ -147,7 +147,7 @@ function start(){
 
                 if (j === 0) {
                     let alpha = config.mouseSize / dist;
-                    a.color = `rgba(255,179,186, ${alpha})`;
+                    a.color = `rgba(${color}, ${alpha})`;
                     dist < config.mouseSize ? force = (dist - config.mouseSize) * b.mass : force = a.mass;
                 }
 

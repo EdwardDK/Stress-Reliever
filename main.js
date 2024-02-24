@@ -216,3 +216,15 @@ function start(){
     window.addEventListener('mousedown', isDown);
     window.addEventListener('mouseup', isDown);
 }
+
+
+let myVar;
+
+function myFunction() {
+    myVar = setTimeout(showPage, 4000);
+}
+
+function showPage() { document.getElementById("spinner").style.display = "none";
+    document.getElementById('hide').style.display = "block";
+    document.getElementById('myDiv').style.display = "block";
+}

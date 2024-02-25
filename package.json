@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "@picocss/pico": "^2.0.3",
+    "milligram": "^1.4.1"
+  }
+}
